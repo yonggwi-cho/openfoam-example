@@ -1,0 +1,68 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX-OS                                                  |
+|   o   O   o      | Version: v2.4.0                                           |
+|    o     o       | Web:     http://www.engys.com                            |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class volScalarField;
+    location "0";
+    object p;
+}
+dimensions [ 0 2 -2 0 0 0 0 ];
+internalField uniform 0.0;
+boundaryField
+{
+    ffminx
+    {
+        type zeroGradient;
+    }
+
+    ffmaxx
+    {
+        type fixedValue;
+        value uniform 0.0;
+    }
+
+    ffminy
+    {
+        type zeroGradient;
+    }
+
+    ffmaxy
+    {
+        type zeroGradient;
+    }
+
+    ffminz
+    {
+        type zeroGradient;
+    }
+
+    ffmaxz
+    {
+        type zeroGradient;
+    }
+
+    nsx_concept_LOW
+    {
+        type zeroGradient;
+    }
+
+    procBoundary0to1
+    {
+        type processor;
+        value uniform 0;
+    }
+
+    procBoundary1to0
+    {
+        type processor;
+        value uniform 0;
+    }
+
+}

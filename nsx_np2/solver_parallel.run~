@@ -1,0 +1,43 @@
+#!/bin/bash
+echo "******************"
+echo "*    Run Case    *"
+echo "******************"
+
+export CASE=`pwd`
+export NP=2
+export LOG=$CASE/simplefoam.log
+export ENV_LOADER=/opt/OpenFOAM/OpenFOAM-v1706/etc/bashrc
+export VENDOR_HOME=/opt/OpenFOAM
+export PV_VERSION=
+export MACHINEFILE=
+export SOLVER=simpleFoam
+
+echo "Case         : $CASE"
+echo "Procs        : $NP"
+echo "Log          : $LOG"
+echo "Env          : $ENV_LOADER"
+echo "Vendor       : $VENDOR_HOME"
+echo "Paraview     : $PV_VERSION"
+echo "MachineFile  : $MACHINEFILE"
+echo "Solver       : $SOLVER"
+
+unset LD_LIBRARY_PATH
+unset WM_COMPILER
+unset WM_PROJECT_VERSION
+unset WM_THIRDPARTY_VERSION
+unset ParaView_MAJOR
+unset ParaView_VERSION
+unset WM_MPLIB
+unset FOAM_MPI
+
+export ParaView_VERSION=$PV_VERSION
+export FOAM_INST_DIR=$VENDOR_HOME
+. $ENV_LOADER
+
+set -e
+set -o pipefail
+
+
+#mpirun  -np $NP $MACHINEFILE $SOLVER -parallel -case $CASE 2>&1 | tee -a $LOG
+mpirun  -np $NP $SOLVER -parallel -case $CASE 2>&1 | tee -a $LOG
+
